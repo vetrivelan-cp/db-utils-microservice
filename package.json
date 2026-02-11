@@ -1,0 +1,33 @@
+{
+  "name": "db-utils-microservice",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/db-utils-microservice",
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@nestjs/common": "^11.1.13",
+    "jsonstream": "^1.0.3",
+    "mongoose": "^9.2.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/jsonstream": "^0.8.33",
+    "@types/node": "^25.2.3",
+    "rimraf": "^6.1.2",
+    "typescript": "^5.9.3"
+  }
+}
