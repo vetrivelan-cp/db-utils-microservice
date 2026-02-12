@@ -1,4 +1,4 @@
-name: build-and-deploy
+name: db-utils-microservice
 
 on:
   push:
