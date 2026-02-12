@@ -4,22 +4,37 @@ on:
   push:
     branches:
       - main
+
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout to repository
-      - uses: actions/setup-node@v4
-        uses: actions/checkout@v2
-      - name: install and build
-        run: npm ci
-      - name: publish to registry
-        uses: actions/setup-node@v2
+      # Step 1: Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node + GitHub registry auth
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 18
-          registry-url: 'https://npm.pkg.github.com'
-      - run: npm install
-      - run: npm run build
-      - run: npm publish
+          registry-url: https://npm.pkg.github.com
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Build project
+      - name: Build project
+        run: npm run build
+
+      # Step 5: Publish package
+      - name: Publish package
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
