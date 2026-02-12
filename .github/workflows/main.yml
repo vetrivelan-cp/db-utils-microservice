@@ -4,22 +4,33 @@ on:
   push:
     branches:
       - main
+
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout to repository
-      - uses: actions/setup-node@v4
-        uses: actions/checkout@v2
-      - name: install and build
-        run: npm ci
-      - name: publish to registry
-        uses: actions/setup-node@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 18
-          registry-url: 'https://npm.pkg.github.com'
-      - run: npm install
-      - run: npm run build
-      - run: npm publish
+          registry-url: https://npm.pkg.github.com
+          scope: '@vetrivelan-cp'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Publish package
+        run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

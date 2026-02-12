@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/vetrivelan-cp",
+    "registry": "https://npm.pkg.github.com",
     "access": "public"
   },
   "files": [
