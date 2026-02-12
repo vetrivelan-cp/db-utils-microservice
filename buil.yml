@@ -1,22 +1,22 @@
-name: random-string-generator
+name: name: db-utils-microservice
 
 on:
 push:
 branches:
-- mmain
+- main
 jobs:
 buld-and-deploy:
 runs-on: ubuntu-latest
 steps:
 - name: checkout to repository
-uses: actions/checkout@v2
+  uses: actions/checkout@v2
 - name: install and build
-run: npm ci
+  run: npm ci
 - name: publish to registry
-uses: action/setup-node@v2
-with:
-node-version: v18.16.0
-registry-url: 'https://npm.pkg.github.com
-run: npm publish
-env:
-NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  uses: action/setup-node@v2
+  with:
+    node-version: v18.16.0
+    registry-url: 'https://npm.pkg.github.com'
+- run: npm publish
+  env:
+    NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
