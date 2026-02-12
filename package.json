@@ -4,18 +4,18 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@vetrivelan-cp"
+    "registry": "https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vetrivelan-cp/db-utils-microservice.git"
-  }
+  },
   "files": [
     "dist"
   ],
   "scripts": {
-   "buid": "rimraf dist && tsc",
-   "prepublish": "npm run build"
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [],
   "author": "Vetri velan",
