@@ -7,7 +7,7 @@ branches:
 permissions:
   contents: read
   packages: write
-  
+
 jobs:
 buld-and-deploy:
 runs-on: ubuntu-latest
@@ -21,6 +21,7 @@ steps:
   with:
     node-version: v18.16.0
     registry-url: 'https://npm.pkg.github.com'
+    scope: '@vetrivelan-cp'
 - run: npm publish
   env:
     NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
