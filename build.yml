@@ -1,27 +1,36 @@
 name: db-utils-microservice
 
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
+
 permissions:
-  contents: read
   packages: write
+  contents: read
 
 jobs:
-buld-and-deploy:
-runs-on: ubuntu-latest
-steps:
-- name: checkout to repository
-  uses: actions/checkout@v2
-- name: install and build
-  run: npm ci
-- name: publish to registry
-  uses: action/setup-node@v2
-  with:
-    node-version: v18.16.0
-    registry-url: 'https://npm.pkg.github.com'
-    scope: '@vetrivelan-cp'
-- run: npm publish
-  env:
-    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20  # Upgraded to 20 for better compatibility
+          registry-url: https://npm.pkg.github.com
+          scope: '@vetrivelan-cp'
+
+      - name: Install dependencies
+        run: npm ci  # Use 'ci' for faster, reliable builds in GitHub Actions
+
+      - name: Build project
+        run: npm run build
+
+      - name: Publish package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -6,8 +6,8 @@ on:
       - main
 
 permissions:
-  contents: read
   packages: write
+  contents: read
 
 jobs:
   build-and-deploy:
@@ -20,12 +20,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20  # Upgraded to 20 for better compatibility
           registry-url: https://npm.pkg.github.com
           scope: '@vetrivelan-cp'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci  # Use 'ci' for faster, reliable builds in GitHub Actions
 
       - name: Build project
         run: npm run build
